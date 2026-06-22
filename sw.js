@@ -8,7 +8,7 @@
 //   পুরনো cache auto-delete হবে, নতুন cache নেবে।
 // ============================================================
 
-var CACHE_NAME = 'aumatiq-finance-v1';
+var CACHE_NAME = 'aumatiq-finance-v2';
 
 var APP_SHELL_FILES = [
   './index.html',
