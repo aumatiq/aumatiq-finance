@@ -1,0 +1,1918 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="auto">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="description" content="AUMATIQ Financial Automation System — Business Finance Tracker">
+<meta name="theme-color" content="#0A0A0F" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F8F9FF" media="(prefers-color-scheme: light)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="AUMATIQ">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>AUMATIQ — Finance Tracker</title>
+
+<!-- Google Fonts — AUMATIQ Brand Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   AUMATIQ Finance PWA — Master Stylesheet
+   System Default theme (respects OS dark/light)
+   Brand: Dark #0A0A0F | Indigo #4F46E5 | Gold #F5A623
+   ============================================================ */
+
+/* ── CSS Custom Properties (Dark Mode — Default) ── */
+:root {
+  --bg-primary:    #0A0A0F;
+  --bg-secondary:  #0D1117;
+  --bg-card:       #111118;
+  --bg-input:      #1A1A28;
+  --bg-overlay:    rgba(10, 10, 15, 0.95);
+
+  --indigo:        #4F46E5;
+  --indigo-light:  #6366F1;
+  --indigo-dim:    rgba(79, 70, 229, 0.12);
+  --indigo-border: rgba(79, 70, 229, 0.25);
+  --gold:          #F5A623;
+  --gold-light:    #F8C85D;
+  --gold-dim:      rgba(245, 166, 35, 0.12);
+
+  --text-primary:  #F8F9FF;
+  --text-secondary:#A0A0B0;
+  --text-muted:    #606070;
+
+  --border:        rgba(79, 70, 229, 0.2);
+  --border-focus:  rgba(79, 70, 229, 0.6);
+  --shadow-card:   0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-glow:   0 0 24px rgba(79, 70, 229, 0.2);
+
+  --radius-sm:     8px;
+  --radius-md:     12px;
+  --radius-lg:     16px;
+  --radius-xl:     20px;
+
+  --font-display:  'Syne', sans-serif;
+  --font-body:     'Inter', sans-serif;
+
+  --type-btn-expense: #FF6B6B;
+  --type-btn-income:  #4CAF50;
+  --type-btn-savings: var(--gold);
+
+  --transition:    all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Light Mode ── */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-primary:    #F5F5F8;
+    --bg-secondary:  #EBEBF0;
+    --bg-card:       #FFFFFF;
+    --bg-input:      #F0F0F5;
+    --bg-overlay:    rgba(245, 245, 248, 0.97);
+
+    --text-primary:  #1A1A2E;
+    --text-secondary:#4A4A5A;
+    --text-muted:    #9090A0;
+
+    --border:        rgba(79, 70, 229, 0.15);
+    --border-focus:  rgba(79, 70, 229, 0.5);
+    --shadow-card:   0 4px 20px rgba(0, 0, 0, 0.08);
+    --shadow-glow:   0 0 20px rgba(79, 70, 229, 0.1);
+    --indigo-dim:    rgba(79, 70, 229, 0.08);
+    --indigo-border: rgba(79, 70, 229, 0.2);
+    --gold-dim:      rgba(245, 166, 35, 0.08);
+  }
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HEADER ── */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-overlay);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-logo {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--indigo), var(--indigo-light));
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 14px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.header-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: 1px;
+  color: var(--text-primary);
+}
+
+.header-title span { color: var(--gold); }
+
+.header-time {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  text-align: right;
+}
+
+/* ── MAIN CONTENT ── */
+.app-main {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 20px 16px 100px;
+}
+
+/* ── SECTION LABEL ── */
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--indigo-light);
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* ── TYPE SELECTOR ── */
+.type-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.type-btn {
+  padding: 14px 10px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  -webkit-appearance: none;
+}
+
+.type-btn .type-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.type-btn:hover {
+  border-color: var(--indigo-border);
+  color: var(--text-primary);
+}
+
+.type-btn.active-expense {
+  background: rgba(255, 107, 107, 0.1);
+  border-color: rgba(255, 107, 107, 0.5);
+  color: #FF6B6B;
+  box-shadow: 0 4px 16px rgba(255, 107, 107, 0.15);
+}
+
+.type-btn.active-income {
+  background: rgba(76, 175, 80, 0.1);
+  border-color: rgba(76, 175, 80, 0.5);
+  color: #4CAF50;
+  box-shadow: 0 4px 16px rgba(76, 175, 80, 0.15);
+}
+
+.type-btn.active-savings {
+  background: var(--gold-dim);
+  border-color: rgba(245, 166, 35, 0.5);
+  color: var(--gold);
+  box-shadow: 0 4px 16px rgba(245, 166, 35, 0.15);
+}
+
+/* ── FORM CARD ── */
+.form-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 24px 20px;
+  box-shadow: var(--shadow-card);
+}
+
+/* ── FORM GROUP ── */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 7px;
+  letter-spacing: 0.3px;
+}
+
+.form-label .required-star {
+  color: #FF6B6B;
+  margin-left: 3px;
+}
+
+/* ── INPUTS & SELECTS ── */
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 16px; /* iOS zoom fix — must stay 16px */
+  font-weight: 400;
+  padding: 13px 14px;
+  outline: none;
+  transition: var(--transition);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--indigo);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+  background: var(--bg-secondary);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--text-muted);
+}
+
+/* Android select option color fix */
+.form-select option {
+  color: #000000;
+  background: #ffffff;
+}
+
+/* ── AMOUNT INPUT — Big & Bold ── */
+.amount-wrapper {
+  position: relative;
+}
+
+.amount-prefix {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gold);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.amount-input {
+  padding-left: 36px !important;
+  font-family: var(--font-display) !important;
+  font-size: 26px !important;
+  font-weight: 700 !important;
+  color: var(--text-primary) !important;
+  letter-spacing: -0.5px;
+}
+
+/* ── SELECT WRAPPER (custom arrow) ── */
+.select-wrapper {
+  position: relative;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--text-muted);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.form-select {
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+/* ── TEXTAREA ── */
+.form-textarea {
+  resize: none;
+  min-height: 80px;
+  line-height: 1.6;
+}
+
+/* ── TWO COLUMN GRID ── */
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* ── CATEGORY MANAGEMENT ── */
+.category-manage-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--indigo-light);
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 6px;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.category-manage-link:hover { color: var(--gold); }
+
+/* ── DYNAMIC FIELD VISIBILITY ── */
+.field-expense,
+.field-income,
+.field-savings,
+.field-note-expense,
+.field-note-income,
+.field-note-savings {
+  display: none;
+}
+
+.show-expense .field-expense,
+.show-expense .field-note-expense { display: block; }
+
+.show-income .field-income,
+.show-income .field-note-income { display: block; }
+
+.show-savings .field-savings,
+.show-savings .field-note-savings { display: block; }
+
+/* ── SUBMIT BUTTON ── */
+.btn-submit {
+  width: 100%;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, var(--indigo), var(--indigo-light));
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  letter-spacing: 0.3px;
+  min-height: 54px;
+  -webkit-appearance: none;
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(79, 70, 229, 0.35);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-submit.loading .btn-text { display: none; }
+.btn-submit.loading .btn-spinner { display: block; }
+.btn-spinner { display: none; }
+
+/* ── SPINNER ── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner-circle {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* ── ERROR MESSAGES ── */
+.field-error {
+  font-size: 12px;
+  color: #FF6B6B;
+  margin-top: 5px;
+  display: none;
+  font-weight: 500;
+}
+
+.field-error.show { display: block; }
+
+.form-input.error,
+.form-select.error,
+.form-textarea.error {
+  border-color: rgba(255, 107, 107, 0.6);
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+}
+
+/* ============================================================
+   REVIEW SCREEN OVERLAY
+   ============================================================ */
+
+.review-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--bg-overlay);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  align-items: flex-end;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.review-overlay.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.review-sheet {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  padding: 28px 20px 40px;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.review-overlay.show .review-sheet {
+  transform: translateY(0);
+}
+
+.review-handle {
+  width: 40px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  margin: 0 auto 24px;
+}
+
+.review-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+/* Amount highlight in review */
+.review-amount-block {
+  background: var(--indigo-dim);
+  border: 1px solid var(--indigo-border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.review-amount-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.review-amount-value {
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.review-amount-value .currency {
+  font-size: 24px;
+  vertical-align: top;
+  margin-top: 6px;
+  display: inline-block;
+}
+
+/* Review items list */
+.review-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.review-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.review-item:last-child { border-bottom: none; }
+
+.review-item-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.review-item-value {
+  font-size: 14px;
+  color: var(--text-primary);
+  font-weight: 500;
+  text-align: right;
+  word-break: break-word;
+}
+
+/* ── Type badge in review ── */
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.type-badge.expense {
+  background: rgba(255, 107, 107, 0.12);
+  color: #FF6B6B;
+}
+
+.type-badge.income {
+  background: rgba(76, 175, 80, 0.12);
+  color: #4CAF50;
+}
+
+.type-badge.savings {
+  background: var(--gold-dim);
+  color: var(--gold);
+}
+
+/* Review buttons */
+.review-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.btn-review-edit {
+  padding: 14px;
+  background: transparent;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  -webkit-appearance: none;
+}
+
+.btn-review-edit:hover {
+  border-color: var(--indigo-border);
+  background: var(--indigo-dim);
+}
+
+.btn-review-confirm {
+  padding: 14px;
+  background: linear-gradient(135deg, var(--indigo), var(--indigo-light));
+  border: none;
+  border-radius: var(--radius-md);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  -webkit-appearance: none;
+}
+
+.btn-review-confirm:hover {
+  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-review-confirm:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ============================================================
+   TOAST NOTIFICATION
+   ============================================================ */
+
+.toast-container {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+  width: calc(100% - 32px);
+  max-width: 400px;
+}
+
+.toast {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--shadow-card);
+  animation: toastIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  pointer-events: all;
+}
+
+.toast.removing {
+  animation: toastOut 0.25s ease forwards;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(-16px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes toastOut {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(-8px) scale(0.97); }
+}
+
+.toast-icon { font-size: 20px; flex-shrink: 0; }
+
+.toast-body { flex: 1; }
+.toast-title { font-size: 14px; font-weight: 700; color: var(--text-primary); }
+.toast-msg   { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+
+.toast.success { border-left: 3px solid #4CAF50; }
+.toast.error   { border-left: 3px solid #FF6B6B; }
+.toast.warning { border-left: 3px solid var(--gold); }
+.toast.info    { border-left: 3px solid var(--indigo); }
+
+/* ============================================================
+   CATEGORY MANAGER MODAL
+   ============================================================ */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 250;
+  background: rgba(10, 10, 15, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.modal-overlay.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 24px 20px;
+  width: 100%;
+  max-width: 400px;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-card);
+  transform: scale(0.95);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-overlay.show .modal-box {
+  transform: scale(1);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.modal-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-input);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.modal-close:hover { background: var(--indigo-dim); color: var(--text-primary); }
+
+.modal-body {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.category-list-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.category-item-modal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: var(--bg-input);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+}
+
+.category-item-modal span { flex: 1; }
+
+.cat-delete-btn {
+  background: none;
+  border: none;
+  color: #FF6B6B;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+.cat-delete-btn:hover { background: rgba(255, 107, 107, 0.1); }
+
+.add-category-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.add-category-input {
+  flex: 1;
+  background: var(--bg-input);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 15px;
+  padding: 10px 12px;
+  outline: none;
+}
+
+.add-category-input:focus {
+  border-color: var(--indigo);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.add-category-btn {
+  padding: 10px 16px;
+  background: var(--indigo);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 18px;
+  transition: var(--transition);
+  -webkit-appearance: none;
+}
+
+.add-category-btn:hover { background: var(--indigo-light); }
+
+/* ── DIVIDER ── */
+.form-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 20px 0;
+}
+
+/* ── OFFLINE BANNER ── */
+.offline-banner {
+  background: rgba(245, 166, 35, 0.1);
+  border: 1px solid rgba(245, 166, 35, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--gold);
+  display: none;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.offline-banner.show { display: flex; }
+
+/* ── FOOTER INFO ── */
+.app-footer {
+  text-align: center;
+  padding: 16px 20px;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 380px) {
+  .type-btn { font-size: 12px; padding: 12px 6px; }
+  .type-btn .type-icon { font-size: 20px; }
+  .review-amount-value { font-size: 34px; }
+  .form-card { padding: 20px 16px; }
+  .app-main { padding: 16px 12px 100px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ─────────────────────────────────────────────────────────
+  TOAST CONTAINER
+───────────────────────────────────────────────────────── -->
+<div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+<!-- ─────────────────────────────────────────────────────────
+  HEADER
+───────────────────────────────────────────────────────── -->
+<header class="app-header">
+  <div class="header-brand">
+    <div class="header-logo">A</div>
+    <span class="header-title">AUMATIQ<span>.</span></span>
+  </div>
+  <div class="header-time" id="headerTime">
+    <div id="currentDate">—</div>
+    <div id="currentTime">—</div>
+  </div>
+</header>
+
+<!-- ─────────────────────────────────────────────────────────
+  MAIN CONTENT
+───────────────────────────────────────────────────────── -->
+<main class="app-main">
+
+  <!-- Offline banner -->
+  <div class="offline-banner" id="offlineBanner">
+    📶 Offline মোডে আছেন। Entry টি পরে sync হবে।
+  </div>
+
+  <!-- Type selector -->
+  <span class="section-label">এন্ট্রির ধরন বেছে নাও</span>
+  <div class="type-selector" role="group" aria-label="Entry type">
+    <button class="type-btn" data-type="খরচ" id="btn-expense" aria-pressed="false">
+      <span class="type-icon">💸</span>
+      <span>খরচ</span>
+    </button>
+    <button class="type-btn" data-type="আয়" id="btn-income" aria-pressed="false">
+      <span class="type-icon">💰</span>
+      <span>আয়</span>
+    </button>
+    <button class="type-btn" data-type="সঞ্চয়" id="btn-savings" aria-pressed="false">
+      <span class="type-icon">🏦</span>
+      <span>সঞ্চয়</span>
+    </button>
+  </div>
+
+  <!-- ── MAIN FORM ── -->
+  <div class="form-card" id="mainFormCard">
+    <form id="financeForm" novalidate>
+
+      <!-- ── Amount (always visible) ── -->
+      <div class="form-group">
+        <label class="form-label" for="inputAmount">
+          পরিমাণ <span class="required-star">*</span>
+        </label>
+        <div class="amount-wrapper">
+          <span class="amount-prefix">৳</span>
+          <input
+            type="number"
+            id="inputAmount"
+            name="amount"
+            class="form-input amount-input"
+            placeholder="0"
+            min="1"
+            step="any"
+            inputmode="decimal"
+            autocomplete="off"
+            required
+          >
+        </div>
+        <div class="field-error" id="err-amount">⚠️ পরিমাণ লেখা বাধ্যতামূলক।</div>
+      </div>
+
+      <!-- ── Date (always visible) ── -->
+      <div class="form-group">
+        <label class="form-label" for="inputDate">
+          তারিখ <span class="required-star">*</span>
+        </label>
+        <input
+          type="text"
+          id="inputDate"
+          name="date"
+          class="form-input"
+          placeholder="DD/MM/YYYY"
+          maxlength="10"
+          inputmode="numeric"
+          autocomplete="off"
+          required
+        >
+        <div class="field-error" id="err-date">⚠️ তারিখ সঠিকভাবে লিখুন (DD/MM/YYYY)।</div>
+      </div>
+
+      <!-- ── Member (always visible) ── -->
+      <div class="form-group">
+        <label class="form-label" for="inputMember">
+          Member <span class="required-star">*</span>
+        </label>
+        <div class="select-wrapper">
+          <select id="inputMember" name="member" class="form-select" required>
+            <option value="" disabled selected>Member বেছে নাও</option>
+            <option value="AUMATIQ Admin">AUMATIQ Admin</option>
+            <option value="Team Member 1">Team Member 1</option>
+            <option value="Team Member 2">Team Member 2</option>
+            <option value="Team Member 3">Team Member 3</option>
+          </select>
+          <span class="select-arrow"></span>
+        </div>
+        <div class="field-error" id="err-member">⚠️ কে এন্ট্রি দিচ্ছেন সেটা বাছাই করো।</div>
+      </div>
+
+      <!-- ── Payment Method (always visible) ── -->
+      <div class="form-group">
+        <label class="form-label" for="inputPayment">
+          Payment Method <span class="required-star">*</span>
+        </label>
+        <div class="select-wrapper">
+          <select id="inputPayment" name="payment" class="form-select" required>
+            <option value="" disabled selected>Payment method বেছে নাও</option>
+            <option value="Cash">💵 Cash</option>
+            <option value="bKash">📱 bKash</option>
+            <option value="Nagad">📱 Nagad</option>
+            <option value="Rocket">📱 Rocket</option>
+            <option value="Bank">🏦 Bank Transfer</option>
+            <option value="Card">💳 Card</option>
+          </select>
+          <span class="select-arrow"></span>
+        </div>
+        <div class="field-error" id="err-payment">⚠️ Payment method বাধ্যতামূলক।</div>
+      </div>
+
+      <!-- ═══════════════════════════════
+        EXPENSE FIELDS
+      ═══════════════════════════════ -->
+      <div class="field-expense">
+        <div class="form-divider"></div>
+        <div class="form-group">
+          <label class="form-label" for="selectExpenseCat">
+            খরচের ক্যাটাগরি <span class="required-star">*</span>
+          </label>
+          <div class="select-wrapper">
+            <select id="selectExpenseCat" name="expenseCategory" class="form-select">
+              <option value="" disabled selected>ক্যাটাগরি বেছে নাও</option>
+              <!-- Categories populated by JS -->
+            </select>
+            <span class="select-arrow"></span>
+          </div>
+          <a class="category-manage-link" onclick="openCategoryManager('expense')">
+            ⚙️ ক্যাটাগরি add/remove করো
+          </a>
+          <div class="field-error" id="err-expense-cat">⚠️ খরচের ক্যাটাগরি বাছাই করো।</div>
+        </div>
+      </div>
+
+      <!-- Note: খরচের বিবরণ (unique name) -->
+      <div class="field-note-expense">
+        <div class="form-group">
+          <label class="form-label" for="noteExpense">খরচের বিবরণ ও উদ্দেশ্য</label>
+          <textarea
+            id="noteExpense"
+            name="noteExpense"
+            class="form-textarea"
+            placeholder="কী কারণে এই খরচ? সংক্ষেপে লিখো... (যেমন: Client meeting-এর জন্য Uber)"
+            rows="3"
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════
+        INCOME FIELDS
+      ═══════════════════════════════ -->
+      <div class="field-income">
+        <div class="form-divider"></div>
+        <div class="form-group">
+          <label class="form-label" for="selectIncomeCat">
+            আয়ের উৎস <span class="required-star">*</span>
+          </label>
+          <div class="select-wrapper">
+            <select id="selectIncomeCat" name="incomeCategory" class="form-select">
+              <option value="" disabled selected>আয়ের উৎস বেছে নাও</option>
+            </select>
+            <span class="select-arrow"></span>
+          </div>
+          <a class="category-manage-link" onclick="openCategoryManager('income')">
+            ⚙️ ক্যাটাগরি add/remove করো
+          </a>
+          <div class="field-error" id="err-income-cat">⚠️ আয়ের উৎস বাছাই করো।</div>
+        </div>
+      </div>
+
+      <!-- Note: আয়ের উৎস বিস্তারিত (unique name) -->
+      <div class="field-note-income">
+        <div class="form-group">
+          <label class="form-label" for="noteIncome">আয়ের উৎস বিস্তারিত</label>
+          <textarea
+            id="noteIncome"
+            name="noteIncome"
+            class="form-textarea"
+            placeholder="কোন project বা client থেকে এই আয়? বিস্তারিত লিখো..."
+            rows="3"
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════
+        SAVINGS FIELDS
+      ═══════════════════════════════ -->
+      <div class="field-savings">
+        <div class="form-divider"></div>
+        <div class="form-group">
+          <label class="form-label" for="selectSavingsCat">
+            সঞ্চয়ের ধরন <span class="required-star">*</span>
+          </label>
+          <div class="select-wrapper">
+            <select id="selectSavingsCat" name="savingsCategory" class="form-select">
+              <option value="" disabled selected>সঞ্চয়ের ধরন বেছে নাও</option>
+            </select>
+            <span class="select-arrow"></span>
+          </div>
+          <a class="category-manage-link" onclick="openCategoryManager('savings')">
+            ⚙️ ক্যাটাগরি add/remove করো
+          </a>
+          <div class="field-error" id="err-savings-cat">⚠️ সঞ্চয়ের ধরন বাছাই করো।</div>
+        </div>
+      </div>
+
+      <!-- Note: সঞ্চয়ের লক্ষ্য (unique name) -->
+      <div class="field-note-savings">
+        <div class="form-group">
+          <label class="form-label" for="noteSavings">সঞ্চয়ের লক্ষ্য ও পরিকল্পনা</label>
+          <textarea
+            id="noteSavings"
+            name="noteSavings"
+            class="form-textarea"
+            placeholder="এই সঞ্চয় কিসের জন্য? ভবিষ্যৎ পরিকল্পনা লিখো... (যেমন: Office equipment কেনার জন্য)"
+            rows="3"
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="btn-submit" id="btnSubmit" disabled>
+        <span class="btn-text">📋 এন্ট্রি Review করো</span>
+        <span class="btn-spinner"><span class="spinner-circle"></span></span>
+      </button>
+
+    </form>
+  </div>
+
+  <div class="app-footer">
+    AUMATIQ Finance Tracker v1.0 · Powered by Google Sheets
+  </div>
+</main>
+
+<!-- ─────────────────────────────────────────────────────────
+  REVIEW OVERLAY
+───────────────────────────────────────────────────────── -->
+<div class="review-overlay" id="reviewOverlay" role="dialog" aria-modal="true" aria-label="Entry Review">
+  <div class="review-sheet">
+    <div class="review-handle"></div>
+    <h2 class="review-title">✅ Entry নিশ্চিত করুন</h2>
+
+    <!-- Amount highlight -->
+    <div class="review-amount-block">
+      <span class="review-amount-label">মোট পরিমাণ</span>
+      <div class="review-amount-value">
+        <span class="currency">৳</span>
+        <span id="reviewAmountDisplay">0</span>
+      </div>
+    </div>
+
+    <!-- Details list -->
+    <div class="review-items" id="reviewItems"></div>
+
+    <!-- Action buttons -->
+    <div class="review-actions">
+      <button class="btn-review-edit" id="btnReviewEdit" onclick="closeReview()">
+        ✏️ এডিট করুন
+      </button>
+      <button class="btn-review-confirm" id="btnReviewConfirm" onclick="submitEntry()">
+        ✅ নিশ্চিত করুন
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+  CATEGORY MANAGER MODAL
+───────────────────────────────────────────────────────── -->
+<div class="modal-overlay" id="categoryModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3 class="modal-title" id="categoryModalTitle">ক্যাটাগরি পরিচালনা</h3>
+      <button class="modal-close" onclick="closeCategoryManager()" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="category-list-modal" id="categoryListModal"></div>
+      <div class="add-category-row">
+        <input
+          type="text"
+          class="add-category-input"
+          id="newCategoryInput"
+          placeholder="নতুন ক্যাটাগরি লিখুন..."
+          maxlength="50"
+        >
+        <button class="add-category-btn" onclick="addCategory()">+</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+  JAVASCRIPT
+  ============================================================ -->
+<script>
+'use strict';
+
+// ─────────────────────────────────────────────────────────────
+// ⚠️ CONFIGURATION — এখানে Web App URL paste করো
+// Apps Script → Deploy → Web App → URL copy করে নিচে দাও
+// ─────────────────────────────────────────────────────────────
+var WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwMXlBodZM5UBiBWV8yHoH0xn3H5DzmsBb73MwKXA5WflrpC_CiLB_jMg8aj_Fw3uTA/exec";
+// Example: "https://script.google.com/macros/s/AKfycbw.../exec"
+
+// ─────────────────────────────────────────────────────────────
+// DEFAULT CATEGORIES — AUMATIQ Business Focused
+// এগুলো localStorage-এ save হয়, app থেকেই add/remove করা যায়
+// ─────────────────────────────────────────────────────────────
+var DEFAULT_CATEGORIES = {
+  expense: [
+    "Office Rent",
+    "বিদ্যুৎ ও ইন্টারনেট বিল",
+    "Team Salary & Payments",
+    "Software & Subscriptions",
+    "Marketing & Ads",
+    "Client Entertainment",
+    "পরিবহন ও ভ্রমণ",
+    "Equipment & Hardware",
+    "Training & Education",
+    "Legal & Compliance",
+    "Bank Charges & Fees",
+    "GoHighLevel / Make.com",
+    "Twilio / VAPI / WATI",
+    "Domain & Hosting",
+    "Office Supplies",
+    "খাবার ও চা-নাস্তা",
+    "বিনোদন ও Events",
+    "আত্মীয়-স্বজন",
+    "বিবিধ খরচ"
+  ],
+  income: [
+    "Client Retainer (Bangladesh)",
+    "Client Retainer (Global — USA/UK)",
+    "Dental Practice Package",
+    "Home Service Package",
+    "School ERP Setup Fee",
+    "Clinic ERP Setup Fee",
+    "WhatsApp Automation Fee",
+    "AI Voice Agent Revenue",
+    "Consulting Fee",
+    "Freelance Projects",
+    "Content Repurposing Revenue",
+    "Product / SaaS Revenue",
+    "Referral Commission",
+    "অন্যান্য আয়"
+  ],
+  savings: [
+    "Business Emergency Fund",
+    "Technology Investment",
+    "Office Setup Fund",
+    "Team Expansion Fund",
+    "Marketing Budget Reserve",
+    "DPS / Fixed Deposit",
+    "Personal Savings",
+    "লক্ষ্যভিত্তিক সঞ্চয়",
+    "Investment Portfolio"
+  ]
+};
+
+// ─────────────────────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────────────────────
+var state = {
+  currentType:     null,    // "খরচ" | "আয়" | "সঞ্চয়"
+  categories:      {},      // loaded from localStorage
+  activeCatType:   null,    // which category manager is open
+  pendingPayload:  null,    // form data waiting for confirm
+};
+
+// ─────────────────────────────────────────────────────────────
+// INIT — runs on page load
+// ─────────────────────────────────────────────────────────────
+(function init() {
+  // Load or initialize categories from localStorage
+  var stored = localStorage.getItem('aq_categories');
+  if (stored) {
+    try {
+      state.categories = JSON.parse(stored);
+      // Ensure all keys exist
+      ['expense', 'income', 'savings'].forEach(function(k) {
+        if (!state.categories[k]) state.categories[k] = DEFAULT_CATEGORIES[k].slice();
+      });
+    } catch(e) {
+      state.categories = deepCopy(DEFAULT_CATEGORIES);
+    }
+  } else {
+    state.categories = deepCopy(DEFAULT_CATEGORIES);
+    saveCategories();
+  }
+
+  // Set today's date in DD/MM/YYYY format
+  setTodayDate();
+
+  // Start clock
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  // Detect offline
+  updateOfflineStatus();
+  window.addEventListener('online',  updateOfflineStatus);
+  window.addEventListener('offline', updateOfflineStatus);
+
+  // Date input auto-format
+  document.getElementById('inputDate').addEventListener('input', handleDateInput);
+
+  // Type buttons
+  document.querySelectorAll('.type-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      selectType(btn.getAttribute('data-type'));
+    });
+  });
+
+  // Form submit → show review
+  document.getElementById('financeForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    handleFormSubmit();
+  });
+
+  // Close review on backdrop click
+  document.getElementById('reviewOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeReview();
+  });
+
+  // Close modal on backdrop click
+  document.getElementById('categoryModal').addEventListener('click', function(e) {
+    if (e.target === this) closeCategoryManager();
+  });
+
+  // Enter key in new category input
+  document.getElementById('newCategoryInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') { e.preventDefault(); addCategory(); }
+  });
+
+  // Populate category dropdowns
+  populateCategoryDropdowns();
+
+  // Amount input → enable/disable submit
+  document.getElementById('inputAmount').addEventListener('input', updateSubmitState);
+})();
+
+// ─────────────────────────────────────────────────────────────
+// CLOCK & DATE
+// ─────────────────────────────────────────────────────────────
+function updateClock() {
+  var now = new Date();
+  // Dhaka time (UTC+6)
+  var utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+  var dhaka = new Date(utc + (6 * 60 * 60000));
+
+  var days = ['রবিবার','সোমবার','মঙ্গলবার','বুধবার','বৃহস্পতিবার','শুক্রবার','শনিবার'];
+  var months = ['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন',
+                'জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
+
+  var d  = dhaka.getDate();
+  var m  = months[dhaka.getMonth()];
+  var y  = dhaka.getFullYear();
+  var dw = days[dhaka.getDay()];
+
+  var hrs = dhaka.getHours();
+  var min = String(dhaka.getMinutes()).padStart(2, '0');
+  var ampm = hrs >= 12 ? 'PM' : 'AM';
+  hrs = hrs % 12 || 12;
+  var hStr = String(hrs).padStart(2, '0');
+
+  document.getElementById('currentDate').textContent = dw + ', ' + d + ' ' + m;
+  document.getElementById('currentTime').textContent = hStr + ':' + min + ' ' + ampm;
+}
+
+function setTodayDate() {
+  var now = new Date();
+  var utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+  var dhaka = new Date(utc + (6 * 60 * 60000));
+
+  var d = String(dhaka.getDate()).padStart(2, '0');
+  var m = String(dhaka.getMonth() + 1).padStart(2, '0');
+  var y = dhaka.getFullYear();
+
+  document.getElementById('inputDate').value = d + '/' + m + '/' + y;
+}
+
+// Auto-format date input: adds "/" as user types
+function handleDateInput(e) {
+  var raw = e.target.value.replace(/\D/g, '').slice(0, 8);
+  var formatted = '';
+  if (raw.length >= 3) {
+    formatted = raw.slice(0, 2) + '/' + raw.slice(2);
+  } else {
+    formatted = raw;
+  }
+  if (raw.length >= 5) {
+    formatted = raw.slice(0, 2) + '/' + raw.slice(2, 4) + '/' + raw.slice(4);
+  }
+  e.target.value = formatted;
+}
+
+// ─────────────────────────────────────────────────────────────
+// TYPE SELECTION
+// ─────────────────────────────────────────────────────────────
+function selectType(type) {
+  state.currentType = type;
+
+  // Update button states
+  document.querySelectorAll('.type-btn').forEach(function(btn) {
+    btn.classList.remove('active-expense', 'active-income', 'active-savings');
+    btn.setAttribute('aria-pressed', 'false');
+  });
+
+  var typeMap = { 'খরচ': 'expense', 'আয়': 'income', 'সঞ্চয়': 'savings' };
+  var typeKey = typeMap[type];
+
+  var activeBtn = document.querySelector('[data-type="' + type + '"]');
+  if (activeBtn) {
+    activeBtn.classList.add('active-' + typeKey);
+    activeBtn.setAttribute('aria-pressed', 'true');
+  }
+
+  // Show relevant fields
+  showFieldsForType(typeKey);
+  updateSubmitState();
+}
+
+function showFieldsForType(typeKey) {
+  var formCard = document.getElementById('mainFormCard');
+  formCard.classList.remove('show-expense', 'show-income', 'show-savings');
+  if (typeKey) {
+    formCard.classList.add('show-' + typeKey);
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// CATEGORY DROPDOWNS
+// ─────────────────────────────────────────────────────────────
+function populateCategoryDropdowns() {
+  populateSelect('selectExpenseCat', state.categories.expense);
+  populateSelect('selectIncomeCat',  state.categories.income);
+  populateSelect('selectSavingsCat', state.categories.savings);
+}
+
+function populateSelect(selectId, categories) {
+  var sel = document.getElementById(selectId);
+  if (!sel) return;
+  var currentVal = sel.value;
+  // Keep first disabled option
+  while (sel.options.length > 1) sel.remove(1);
+  categories.forEach(function(cat) {
+    var opt = document.createElement('option');
+    opt.value = cat;
+    opt.textContent = cat;
+    sel.appendChild(opt);
+  });
+  // Restore value if it still exists
+  if (currentVal) sel.value = currentVal;
+}
+
+// ─────────────────────────────────────────────────────────────
+// CATEGORY MANAGER
+// ─────────────────────────────────────────────────────────────
+function openCategoryManager(type) {
+  state.activeCatType = type;
+  var titles = { expense: '💸 খরচের ক্যাটাগরি', income: '💰 আয়ের ক্যাটাগরি', savings: '🏦 সঞ্চয়ের ক্যাটাগরি' };
+  document.getElementById('categoryModalTitle').textContent = titles[type] || 'ক্যাটাগরি';
+  document.getElementById('newCategoryInput').value = '';
+  renderCategoryList();
+  document.getElementById('categoryModal').classList.add('show');
+}
+
+function closeCategoryManager() {
+  document.getElementById('categoryModal').classList.remove('show');
+  state.activeCatType = null;
+}
+
+function renderCategoryList() {
+  var type = state.activeCatType;
+  var list = state.categories[type] || [];
+  var container = document.getElementById('categoryListModal');
+  container.innerHTML = '';
+  if (list.length === 0) {
+    container.innerHTML = '<p style="color:var(--text-muted);font-size:13px;padding:8px 0;">কোনো ক্যাটাগরি নেই।</p>';
+    return;
+  }
+  list.forEach(function(cat, idx) {
+    var item = document.createElement('div');
+    item.className = 'category-item-modal';
+    item.innerHTML = '<span>' + escapeHtml(cat) + '</span>';
+    var delBtn = document.createElement('button');
+    delBtn.className = 'cat-delete-btn';
+    delBtn.textContent = '🗑';
+    delBtn.title = 'Remove';
+    delBtn.onclick = function() { removeCategory(idx); };
+    item.appendChild(delBtn);
+    container.appendChild(item);
+  });
+}
+
+function addCategory() {
+  var input = document.getElementById('newCategoryInput');
+  var newCat = input.value.trim();
+  if (!newCat) {
+    showToast('warning', 'খালি ক্যাটাগরি', 'ক্যাটাগরির নাম লিখুন।');
+    return;
+  }
+  var type = state.activeCatType;
+  if (!state.categories[type]) state.categories[type] = [];
+  if (state.categories[type].indexOf(newCat) !== -1) {
+    showToast('warning', 'ইতিমধ্যে আছে', '"' + newCat + '" ইতিমধ্যে তালিকায় আছে।');
+    return;
+  }
+  state.categories[type].push(newCat);
+  saveCategories();
+  input.value = '';
+  renderCategoryList();
+  populateCategoryDropdowns();
+  showToast('success', 'যুক্ত হয়েছে', '"' + newCat + '" ক্যাটাগরি যোগ করা হয়েছে।');
+}
+
+function removeCategory(idx) {
+  var type = state.activeCatType;
+  var removed = state.categories[type].splice(idx, 1)[0];
+  saveCategories();
+  renderCategoryList();
+  populateCategoryDropdowns();
+  showToast('info', 'মুছে গেছে', '"' + removed + '" সরানো হয়েছে।');
+}
+
+function saveCategories() {
+  localStorage.setItem('aq_categories', JSON.stringify(state.categories));
+}
+
+// ─────────────────────────────────────────────────────────────
+// FORM VALIDATION
+// ─────────────────────────────────────────────────────────────
+function clearAllErrors() {
+  document.querySelectorAll('.field-error').forEach(function(el) { el.classList.remove('show'); });
+  document.querySelectorAll('.form-input, .form-select, .form-textarea').forEach(function(el) {
+    el.classList.remove('error');
+  });
+}
+
+function showError(inputId, errorId) {
+  var input = document.getElementById(inputId);
+  var error = document.getElementById(errorId);
+  if (input) input.classList.add('error');
+  if (error) error.classList.add('show');
+}
+
+function validateForm() {
+  clearAllErrors();
+  var valid = true;
+  var typeMap = { 'খরচ': 'expense', 'আয়': 'income', 'সঞ্চয়': 'savings' };
+  var typeKey = typeMap[state.currentType];
+
+  // Type
+  if (!state.currentType) {
+    showToast('error', 'ধরন বাছাই করো', 'খরচ, আয় বা সঞ্চয় — একটি বেছে নাও।');
+    valid = false;
+  }
+
+  // Amount
+  var amount = parseFloat(document.getElementById('inputAmount').value);
+  if (!amount || amount <= 0) {
+    showError('inputAmount', 'err-amount');
+    valid = false;
+  }
+
+  // Date
+  var dateVal = document.getElementById('inputDate').value.trim();
+  if (!isValidDate(dateVal)) {
+    showError('inputDate', 'err-date');
+    valid = false;
+  }
+
+  // Member
+  var member = document.getElementById('inputMember').value;
+  if (!member) {
+    showError('inputMember', 'err-member');
+    valid = false;
+  }
+
+  // Payment
+  var payment = document.getElementById('inputPayment').value;
+  if (!payment) {
+    showError('inputPayment', 'err-payment');
+    valid = false;
+  }
+
+  // Category (type-specific)
+  if (typeKey === 'expense' && !document.getElementById('selectExpenseCat').value) {
+    showError('selectExpenseCat', 'err-expense-cat');
+    valid = false;
+  }
+  if (typeKey === 'income' && !document.getElementById('selectIncomeCat').value) {
+    showError('selectIncomeCat', 'err-income-cat');
+    valid = false;
+  }
+  if (typeKey === 'savings' && !document.getElementById('selectSavingsCat').value) {
+    showError('selectSavingsCat', 'err-savings-cat');
+    valid = false;
+  }
+
+  return valid;
+}
+
+function isValidDate(dateStr) {
+  if (!/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)) return false;
+  var parts = dateStr.split('/');
+  var d = parseInt(parts[0]), m = parseInt(parts[1]), y = parseInt(parts[2]);
+  if (m < 1 || m > 12 || d < 1 || d > 31 || y < 2020 || y > 2099) return false;
+  return true;
+}
+
+// ─────────────────────────────────────────────────────────────
+// FORM SUBMIT → SHOW REVIEW
+// ─────────────────────────────────────────────────────────────
+function handleFormSubmit() {
+  if (!validateForm()) return;
+
+  var typeMap = { 'খরচ': 'expense', 'আয়': 'income', 'সঞ্চয়': 'savings' };
+  var typeKey = typeMap[state.currentType];
+
+  var catSelMap = { expense: 'selectExpenseCat', income: 'selectIncomeCat', savings: 'selectSavingsCat' };
+  var category = document.getElementById(catSelMap[typeKey]).value;
+
+  var noteMap = { expense: 'noteExpense', income: 'noteIncome', savings: 'noteSavings' };
+  var noteVal = document.getElementById(noteMap[typeKey]).value.trim();
+
+  var amount  = parseFloat(document.getElementById('inputAmount').value);
+  var date    = document.getElementById('inputDate').value.trim();
+  var member  = document.getElementById('inputMember').value;
+  var payment = document.getElementById('inputPayment').value;
+
+  // Build payload
+  state.pendingPayload = {
+    type:         state.currentType,
+    category:     category,
+    amount:       amount,
+    date:         date,
+    payment:      payment,
+    member:       member,
+    noteExpense:  typeKey === 'expense' ? noteVal : '',
+    noteIncome:   typeKey === 'income'  ? noteVal : '',
+    noteSavings:  typeKey === 'savings' ? noteVal : '',
+  };
+
+  showReview(state.pendingPayload);
+}
+
+// ─────────────────────────────────────────────────────────────
+// REVIEW SCREEN
+// ─────────────────────────────────────────────────────────────
+function showReview(payload) {
+  // Amount display
+  document.getElementById('reviewAmountDisplay').textContent = formatAmount(payload.amount);
+
+  // Type badge
+  var badgeMap = {
+    'খরচ':   '<span class="type-badge expense">💸 খরচ</span>',
+    'আয়':    '<span class="type-badge income">💰 আয়</span>',
+    'সঞ্চয়': '<span class="type-badge savings">🏦 সঞ্চয়</span>',
+  };
+
+  // Payment labels
+  var paymentLabels = {
+    'Cash': '💵 Cash', 'bKash': '📱 bKash', 'Nagad': '📱 Nagad',
+    'Rocket': '📱 Rocket', 'Bank': '🏦 Bank Transfer', 'Card': '💳 Card'
+  };
+
+  var noteLabel = {
+    'খরচ': 'বিবরণ', 'আয়': 'উৎস বিস্তারিত', 'সঞ্চয়': 'লক্ষ্য ও পরিকল্পনা'
+  };
+  var noteVal = payload.noteExpense || payload.noteIncome || payload.noteSavings || '';
+
+  var items = [
+    { label: 'ধরন',        value: badgeMap[payload.type] || payload.type },
+    { label: 'ক্যাটাগরি', value: payload.category },
+    { label: 'তারিখ',     value: payload.date },
+    { label: 'Payment',    value: paymentLabels[payload.payment] || payload.payment },
+    { label: 'Member',     value: payload.member },
+  ];
+
+  if (noteVal) {
+    items.push({ label: noteLabel[payload.type] || 'নোট', value: noteVal });
+  }
+
+  var container = document.getElementById('reviewItems');
+  container.innerHTML = '';
+  items.forEach(function(item) {
+    var div = document.createElement('div');
+    div.className = 'review-item';
+    div.innerHTML =
+      '<span class="review-item-label">' + escapeHtml(item.label) + '</span>' +
+      '<span class="review-item-value">' + item.value + '</span>';
+    container.appendChild(div);
+  });
+
+  // Show overlay
+  document.getElementById('reviewOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeReview() {
+  document.getElementById('reviewOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+  state.pendingPayload = null;
+  document.getElementById('btnReviewConfirm').disabled = false;
+}
+
+// ─────────────────────────────────────────────────────────────
+// SUBMIT ENTRY TO GOOGLE APPS SCRIPT
+// ─────────────────────────────────────────────────────────────
+function submitEntry() {
+  if (!state.pendingPayload) return;
+  if (WEB_APP_URL === "YOUR_WEB_APP_URL_HERE") {
+    showToast('error', 'URL নেই', 'index.html-এ WEB_APP_URL সেট করো।');
+    return;
+  }
+
+  var confirmBtn = document.getElementById('btnReviewConfirm');
+  confirmBtn.disabled = true;
+  confirmBtn.textContent = '⏳ পাঠানো হচ্ছে...';
+
+  var payload = state.pendingPayload;
+
+  fetch(WEB_APP_URL, {
+    method:   'POST',
+    headers:  { 'Content-Type': 'text/plain;charset=utf-8' },
+    body:     JSON.stringify(payload),
+    redirect: 'follow'
+  })
+  .then(function(res) { return res.json(); })
+  .then(function(data) {
+    if (data.success) {
+      closeReview();
+      resetForm();
+      showToast('success', '✅ সফল!', 'এন্ট্রি Google Sheet-এ সংরক্ষিত হয়েছে।');
+    } else {
+      throw new Error(data.error || 'Unknown error');
+    }
+  })
+  .catch(function(err) {
+    confirmBtn.disabled = false;
+    confirmBtn.textContent = '✅ নিশ্চিত করুন';
+    showToast('error', '❌ ব্যর্থ হয়েছে', 'আবার চেষ্টা করো: ' + err.message);
+  });
+}
+
+// ─────────────────────────────────────────────────────────────
+// FORM RESET — proper reset after submit
+// ─────────────────────────────────────────────────────────────
+function resetForm() {
+  document.getElementById('financeForm').reset();
+  setTodayDate();  // Restore today's date
+
+  // Reset type buttons
+  document.querySelectorAll('.type-btn').forEach(function(btn) {
+    btn.classList.remove('active-expense', 'active-income', 'active-savings');
+    btn.setAttribute('aria-pressed', 'false');
+  });
+
+  // Reset field visibility
+  var formCard = document.getElementById('mainFormCard');
+  formCard.classList.remove('show-expense', 'show-income', 'show-savings');
+
+  state.currentType = null;
+
+  // Re-disable submit
+  document.getElementById('btnSubmit').disabled = true;
+
+  clearAllErrors();
+}
+
+// ─────────────────────────────────────────────────────────────
+// SUBMIT BUTTON STATE
+// ─────────────────────────────────────────────────────────────
+function updateSubmitState() {
+  var amount = parseFloat(document.getElementById('inputAmount').value);
+  var hasType = !!state.currentType;
+  var hasAmount = amount > 0;
+  document.getElementById('btnSubmit').disabled = !(hasType && hasAmount);
+}
+
+// ─────────────────────────────────────────────────────────────
+// OFFLINE DETECTION
+// ─────────────────────────────────────────────────────────────
+function updateOfflineStatus() {
+  var banner = document.getElementById('offlineBanner');
+  if (!navigator.onLine) {
+    banner.classList.add('show');
+  } else {
+    banner.classList.remove('show');
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// TOAST SYSTEM
+// ─────────────────────────────────────────────────────────────
+function showToast(type, title, message) {
+  var icons = { success: '✅', error: '❌', warning: '⚠️', info: 'ℹ️' };
+  var container = document.getElementById('toastContainer');
+  var toast = document.createElement('div');
+  toast.className = 'toast ' + type;
+  toast.innerHTML =
+    '<span class="toast-icon">' + icons[type] + '</span>' +
+    '<div class="toast-body">' +
+      '<div class="toast-title">' + escapeHtml(title) + '</div>' +
+      '<div class="toast-msg">' + escapeHtml(message) + '</div>' +
+    '</div>';
+  container.appendChild(toast);
+
+  // Auto-remove after 4s
+  setTimeout(function() {
+    toast.classList.add('removing');
+    setTimeout(function() {
+      if (toast.parentNode) toast.parentNode.removeChild(toast);
+    }, 300);
+  }, 4000);
+}
+
+// ─────────────────────────────────────────────────────────────
+// UTILITIES
+// ─────────────────────────────────────────────────────────────
+function formatAmount(num) {
+  var n = parseFloat(num) || 0;
+  return n.toLocaleString('en-BD', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+}
+
+function escapeHtml(str) {
+  var d = document.createElement('div');
+  d.appendChild(document.createTextNode(String(str || '')));
+  return d.innerHTML;
+}
+
+function deepCopy(obj) {
+  return JSON.parse(JSON.stringify(obj));
+}
+
+// ─────────────────────────────────────────────────────────────
+// SERVICE WORKER REGISTRATION
+// ─────────────────────────────────────────────────────────────
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('./sw.js')
+      .then(function(reg) { console.log('[AUMATIQ SW] Registered:', reg.scope); })
+      .catch(function(err) { console.warn('[AUMATIQ SW] Registration failed:', err); });
+  });
+}
+</script>
+</body>
+</html>
